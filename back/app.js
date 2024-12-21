@@ -20,7 +20,7 @@ const corsOptions = {
   credentials: true
 };
 
-app.use(cors(corsOptions));
+server.use(cors(corsOptions));
 
 server.use(indexRoutes);
 
