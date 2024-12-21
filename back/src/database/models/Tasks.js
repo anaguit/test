@@ -9,7 +9,8 @@ module.exports = (sequelize) => {
             autoIncrement: true
         },
         Title:{
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            allowNull: false
         },
         Completed:{
             type: DataTypes.BOOLEAN,
