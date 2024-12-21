@@ -28,15 +28,19 @@ const getTasks = async ( req, res ) => {
 
 const createTasks = async ( req, res ) => {
     try {
-        /*const token = req.headers["authorization"];
+        const token = req.headers["authorization"];
         const decoded = jwt.verify(token, JWT_SECRET);
-        console.log(decoded);*/
         
         const { Title } = req.body
+        if( !Title ){
+            return res.status(400).json({"msg": "El campo de título es obligatorio"})
+        };
+
         await Tasks.create({
             Title,
-            UserId: 0
-        })
+            UserId: decoded.userToLogin
+        });
+
         res.status(201).json({ "msg": "Tarea Creada" });    
     } catch (error) {
         console.log(error);
