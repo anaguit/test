@@ -1,9 +1,10 @@
 const express = require("express");
 const methodOverride = require("method-override");
+const cors = require('cors');
 
 const server = express();
 const { conn } = require("./src/db.js");
-const { PORT } = require("./src/config.js");
+const { PORT, CORS_DOMAIN } = require("./src/config.js");
 
 const indexRoutes = require("./src/routes.js/indexRoutes");
 const {createUsers} = require("./src/database/precreate/userDefault");
@@ -11,6 +12,15 @@ const {createUsers} = require("./src/database/precreate/userDefault");
 server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
 server.use(methodOverride("_method"));
+
+const corsOptions = {
+  origin: CORS_DOMAIN,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+};
+
+app.use(cors(corsOptions));
 
 server.use(indexRoutes);
 

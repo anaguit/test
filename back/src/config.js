@@ -7,7 +7,8 @@ const {
   DB_HOST,
   DB_PORT,
   JWT_SECRET,
-  NODE_ENV
+  NODE_ENV,
+  CORS_DOMAIN
 } = process.env;
 
 module.exports = {
@@ -19,4 +20,5 @@ module.exports = {
   DB_PORT,
   JWT_SECRET,
   NODE_ENV,
+  CORS_DOMAIN
 };
