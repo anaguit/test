@@ -56,10 +56,13 @@ const updateTasks = async ( req, res ) => {
         if(!taskToEdit){
             return res.status(404).json({"msg":"La tarea no fue encontrada"})
         };
+        const token = req.headers["authorization"];
+        const decoded = jwt.verify(token, JWT_SECRET);
+
         await Tasks.update({
-            Title,
-            Completed,
-            UserId: 0
+            Title: Title || taskToEdit.Title,
+            Completed: Completed || taskToEdit.Completed,
+            UserId: decoded.userToLogin
         }, { where:{ Id:id }});
         
         res.status(200).json({ "msg": "Tarea editada con éxito"})
